@@ -11,6 +11,7 @@ import {
   FaUser,
   FaEllipsisH,
 } from "react-icons/fa";
+import ModeToggle from "./mode-toggle";
 
 const Header: React.FC = () => {
   return (
@@ -31,12 +32,13 @@ const Header: React.FC = () => {
           <Link href="/" className="flex items-center space-x-2">
             <Image
               src="/images/logo.svg"
-              alt="Prostore logo"
+              alt="Nextstore logo"
               width={40}
               height={40}
               className="h-10 w-10"
+              priority={true}
             />
-            <span className="font-bold text-xl tracking-tight">Prostore</span>
+            <span className="font-bold text-xl tracking-tight">Nextstore</span>
           </Link>
         </div>
         {/* Search bar (desktop) */}
@@ -120,14 +122,8 @@ const Header: React.FC = () => {
         <div className="flex items-center space-x-4">
           <nav className="hidden md:flex items-center space-x-3">
             {/* Theme toggle (placeholder) */}
-            <button
-              type="button"
-              aria-label="Toggle Theme"
-              className="inline-flex items-center justify-center rounded-md p-2 hover:bg-brand-dark/50 transition focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-              id="theme-toggle"
-            >
-              <FaSun className="h-6 w-6" />
-            </button>
+
+            <ModeToggle />
             {/* Cart */}
             <Link
               href="/cart"
