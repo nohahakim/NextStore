@@ -11,7 +11,15 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-r from-secondary-dark to-brand text-white mt-10 border-t border-gray-700">
+    <footer
+      className=" bg-gradient-to-r
+        from-secondary-dark
+        to-brand
+        text-white
+        mt-10
+        transition-colors
+        dark:bg-gradient-to-r dark:from-[#1C1C1C] dark:to-[#323232] dark:text-gray-100"
+    >
       <div className="max-w-6xl mx-auto px-5 py-6 flex flex-col md:flex-row items-center justify-between">
         <span className="text-center text-sm md:text-base">
           © {currentYear} {APP_NAME}. All Rights Reserved.
