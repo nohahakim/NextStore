@@ -1,11 +1,12 @@
 import ProductCard from "./product-card";
+import { Product } from "@/types";
 
 const ProductList = ({
   data,
   title,
   limit,
 }: {
-  data: any;
+  data: Product[];
   title?: string;
   limit?: number;
 }) => {
@@ -15,11 +16,11 @@ const ProductList = ({
     <div className="my-10">
       {" "}
       <h2 className="text-4xl font-extrabold mb-8 text-center text-brand-dark   dark:text-white">
-        Newest Arrivals
+        {title || "Neweset Arrivals"}{" "}
       </h2>
       {limitedData.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {limitedData.map((product: any) => (
+          {limitedData.map((product: Product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

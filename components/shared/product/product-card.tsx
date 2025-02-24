@@ -1,26 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaStar, FaRegStar, FaHeart } from "react-icons/fa";
+import { FaStar, FaRegStar } from "react-icons/fa";
 import ProductPrice from "./product-price";
+import { Product } from "@/types";
 
-interface Product {
-  slug: string;
-  images: string[];
-  name: string;
-  brand: string;
-  rating?: number;
-  reviewsCount?: number;
-  price: number;
-  stock?: number;
-  variants?: string[];
-  status?: "new" | "sale" | "featured";
-}
-
-interface ProductCardProps {
-  product: Product;
-}
-
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product }: { product: Product }) => {
   const renderStars = (rating: number = 0) => {
     return Array.from({ length: 5 }, (_, i) =>
       i < Math.floor(rating) ? (
@@ -35,36 +19,27 @@ const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   const statusColors = {
-    new: "from-blue-500 to-cyan-400",
-    sale: "from-red-500 to-rose-400",
     featured: "from-emerald-500 to-teal-400",
   };
 
-  const isInStock = product.stock && product.stock > 0;
+  const isInStock = product.stock > 0;
 
   return (
     <article className="group w-full max-w-sm rounded-xl shadow-xl bg-white dark:bg-gray-800 hover:shadow-2xl transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden isolate relative">
       {/* Image Container */}
       <div className="relative aspect-square overflow-hidden">
-        {product.status && (
+        {product.isFeatured && (
           <div
-            className={`absolute top-4 left-4 z-10 bg-gradient-to-r ${
-              statusColors[product.status]
-            } text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-md`}
+            className={`absolute top-4 left-4 z-10 bg-gradient-to-r ${statusColors.featured} text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide shadow-md`}
           >
-            {product.status}
+            Featured
           </div>
         )}
-
-        {/* <button className="absolute top-4 right-4 z-10 p-2.5 bg-white/90 dark:bg-gray-800/90 rounded-full shadow-md hover:scale-110 hover:text-red-500 transition-all duration-300">
-          <FaHeart className="w-5 h-5" />
-        </button> */}
 
         <Link
           href={`/product/${product.slug}`}
           className="block relative aspect-square"
         >
-          {/* Primary Image */}
           <Image
             src={product.images[0]}
             alt={product.name}
@@ -73,7 +48,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
             className="w-full h-full object-cover transition-opacity duration-500 ease-in-out group-hover:opacity-0"
           />
 
-          {/* Secondary Image: Only show if exists */}
           {product.images[1] && (
             <Image
               src={product.images[1]}
@@ -84,7 +58,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
             />
           )}
 
-          {/* Optional gradient overlay on hover */}
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </Link>
       </div>
@@ -95,17 +68,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <span className="text-sm font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wide">
             {product.brand}
           </span>
-          {product.variants && (
-            <div className="flex gap-2">
-              {product.variants.map((color) => (
-                <span
-                  key={color}
-                  style={{ backgroundColor: color }}
-                  className="w-5 h-5 rounded-full border-2 border-white shadow-sm hover:scale-110 transition-transform cursor-pointer"
-                />
-              ))}
-            </div>
-          )}
         </div>
 
         <Link href={`/product/${product.slug}`} className="block">
@@ -120,21 +82,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
               {renderStars(product.rating)}
             </div>
             <span className="text-sm text-gray-600 dark:text-gray-300">
-              ({product.reviewsCount?.toLocaleString() ?? 0})
+              ({product.numReviews?.toLocaleString() ?? 0})
             </span>
           </div>
         )}
 
         <div className="flex items-center justify-between">
-          {/* <span
-            className={`text-2xl font-bold ${
-              isInStock ? "text-gray-900 dark:text-white" : "text-red-500"
-            } transition-all`}
-          >
-            ${product.price.toFixed(2)}
-          </span> */}
           <ProductPrice
-            value={product.price}
+            value={Number(product.price)}
             className={`text-2xl font-bold ${
               isInStock ? "text-gray-900 dark:text-white" : "text-red-500"
             } transition-all`}
