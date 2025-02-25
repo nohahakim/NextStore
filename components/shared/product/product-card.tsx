@@ -79,7 +79,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         {product.rating !== undefined && (
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1 [&>svg]:hover:scale-110 [&>svg]:transition-transform">
-              {renderStars(product.rating)}
+              {renderStars(Number(product.rating))}
             </div>
             <span className="text-sm text-gray-600 dark:text-gray-300">
               ({product.numReviews?.toLocaleString() ?? 0})

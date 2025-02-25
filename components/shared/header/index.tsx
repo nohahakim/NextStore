@@ -2,16 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  FaBars,
-  FaChevronDown,
-  FaSearch,
-  FaSun,
-  FaShoppingCart,
-  FaUser,
-  FaEllipsisH,
-} from "react-icons/fa";
-import ModeToggle from "./mode-toggle";
+import { FaBars, FaChevronDown, FaSearch } from "react-icons/fa";
 import Menu from "./menu";
 
 const Header: React.FC = () => {

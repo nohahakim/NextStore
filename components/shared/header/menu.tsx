@@ -1,13 +1,5 @@
 import Link from "next/link";
-import {
-  FaBars,
-  FaChevronDown,
-  FaSearch,
-  FaSun,
-  FaShoppingCart,
-  FaUser,
-  FaEllipsisV,
-} from "react-icons/fa";
+import { FaShoppingCart, FaUser, FaEllipsisV } from "react-icons/fa";
 
 import {
   Sheet,
@@ -18,7 +10,6 @@ import {
 } from "@/components/ui/sheet";
 
 import ModeToggle from "./mode-toggle";
-import { FaEllipsisVertical } from "react-icons/fa6";
 
 const Menu = () => {
   return (

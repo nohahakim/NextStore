@@ -37,7 +37,7 @@ const ProductDetailsPage = async (props: {
                 )}
               </div> */}
               <span className="text-gray-600 dark:text-gray-400">
-                {product.rating} of {product.numReviews} reviews
+                {Number(product.rating)} of {product.numReviews} reviews
               </span>
             </div>
           </div>

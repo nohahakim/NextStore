@@ -4,7 +4,7 @@ import { FaSun, FaMoon } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
 const ModeToggle = () => {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const isDark = resolvedTheme === "dark"; // Use `resolvedTheme` for SSR compatibility
 
