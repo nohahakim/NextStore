@@ -19,7 +19,7 @@ const Header: React.FC = () => {
     <header
       className="    w-full
         bg-gradient-to-r from-brand-dark to-brand text-white
-        py-4 px-6 shadow-md fixed top-0 z-50
+        py-4 px-6 shadow-md 
         transition-colors
         dark:bg-gradient-to-r dark:from-[#1C1C1C] dark:to-[#323232] dark:text-gray-100"
     >
