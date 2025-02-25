@@ -22,8 +22,8 @@ const ProductImages = ({ images }: { images: string[] }) => {
           <div
             key={image}
             className={cn(
-              "flex-shrink-0 w-24 h-24 rounded-xl border-2 border-transparent hover:border-brand cursor-pointer transition-all",
-              current === index && "border-brand"
+              "flex-shrink-0 w-24 h-24  border  hover:border-orange-600 cursor-pointer transition-all",
+              current === index && "border-orange-500"
             )}
             onClick={() => setCurrent(index)}
           >
