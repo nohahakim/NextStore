@@ -1,5 +1,7 @@
 "use server";
 
+import { isRedirectError } from "next/dist/client/components/redirect-error";
+
 import { signIn, signOut } from "@/auth";
 import { signInFormSchema } from "../validator";
 
@@ -9,6 +11,7 @@ export async function signInWithCredentials(
   formData: FormData
 ) {
   try {
+    // Set user from form and validate it with Zod schema
     const user = signInFormSchema.parse({
       email: formData.get("email"),
       password: formData.get("password"),
@@ -17,7 +20,11 @@ export async function signInWithCredentials(
     await signIn("credentials", user);
 
     return { success: true, message: "Signed in successfully" };
-  } catch {
+  } catch (error) {
+    if (isRedirectError(error)) {
+      throw error;
+    }
+
     return { success: false, message: "Invalid email or password" };
   }
 }

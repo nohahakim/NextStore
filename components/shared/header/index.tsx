@@ -8,7 +8,7 @@ import Menu from "./menu";
 const Header: React.FC = () => {
   return (
     <header
-      className="    w-full
+      className="    w-full border-b
         bg-gradient-to-r from-brand-dark to-brand text-white
         py-4 px-6 shadow-md 
         transition-colors
@@ -33,18 +33,18 @@ const Header: React.FC = () => {
               alt="Nextstore logo"
               width={40}
               height={40}
-              className="h-10 w-10"
+              className="h-12 w-12 md:h-16 md:w-16"
               priority={true}
             />
-            <span className="font-bold text-xl tracking-tight">Nextstore</span>
+            <span className="font-bold text-xl  tracking-tight">Nextstore</span>
           </Link>
         </div>
         {/* Search bar (desktop) */}
-        <div className="hidden md:flex relative flex-1 mx-8">
+        <div className=" hidden md:flex relative  mx-8">
           <form
             action="/search"
             method="GET"
-            className="flex items-center w-full space-x-2"
+            className="flex items-center  space-x-2"
           >
             {/* Category dropdown */}
             <div className="relative">
@@ -117,93 +117,7 @@ const Header: React.FC = () => {
           </form>
         </div>
 
-        {/* <nav className="hidden md:flex items-center space-x-3">
-            <ModeToggle />
-
-            <Link
-              href="/cart"
-              className="hidden md:flex items-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition relative"
-            >
-              <FaShoppingCart className="text-lg" />
-              <span className="absolute -top-1 -right-1 bg-accent text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                3
-              </span>
-            </Link>
-
-            <Link
-              href="/sign-in"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-4 py-2 text-sm font-medium text-brand-dark hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-            >
-              <FaUser className="h-5 w-5" />
-              Sign In
-            </Link>
-
-            <div className="relative">
-              <button
-                type="button"
-                aria-haspopup="menu"
-                aria-expanded="false"
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-white text-brand-dark hover:bg-accent hover:text-white transition focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-                id="user-profile-button"
-              >
-                S
-              </button>
-              <div
-                id="user-profile-menu"
-                className="absolute right-0 mt-2 w-56 rounded-md border border-gray-200 bg-white shadow-md hidden z-30"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="user-profile-button"
-              >
-                <div className="px-4 py-3 text-sm text-gray-700 border-b">
-                  <div className="flex flex-col space-y-1">
-                    <div className="text-sm font-medium leading-none">Sara</div>
-                    <div className="text-sm text-gray-400 leading-none">
-                      sara@gmail.com
-                    </div>
-                  </div>
-                </div>
-                <div className="py-1">
-                  <Link
-                    href="/user/profile"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-accent hover:text-white"
-                    role="menuitem"
-                  >
-                    User Profile
-                  </Link>
-                  <Link
-                    href="/user/orders"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-accent hover:text-white"
-                    role="menuitem"
-                  >
-                    Order History
-                  </Link>
-                  <form action="/sign-out" method="POST" className="mt-1">
-                    <button
-                      type="submit"
-                      className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-accent hover:text-white"
-                      role="menuitem"
-                    >
-                      Sign Out
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </nav> */}
         <Menu />
-        {/* Mobile nav toggle */}
-        {/* <nav className="md:hidden">
-            <button
-              type="button"
-              aria-haspopup="dialog"
-              aria-expanded="false"
-              className="inline-flex items-center justify-center p-2 rounded-md hover:bg-brand-dark/50 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-              id="mobile-menu-button"
-            >
-              <FaEllipsisH className="h-6 w-6" />
-            </button>
-          </nav> */}
       </div>
     </header>
   );
