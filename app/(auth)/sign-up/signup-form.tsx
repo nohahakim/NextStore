@@ -2,16 +2,21 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { signInWithCredentials } from "@/lib/actions/user.actions";
-import { signInDefaultValues } from "@/lib/constants";
-import { useSearchParams } from "next/navigation";
-import { Sub } from "@radix-ui/react-dropdown-menu";
 
-const CredentialsSignInForm = () => {
-  const [data, action] = useActionState(signInWithCredentials, {
+import { signUpDefaultValues } from "@/lib/constants";
+import { useSearchParams } from "next/navigation";
+import { signUp } from "@/lib/actions/user.actions";
+
+const SignUpForm = () => {
+  const [data, action] = useActionState(signUp, {
     message: "",
     success: false,
   });
+  const { pending } = useFormStatus();
+
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
+
   const SubmitButton = () => {
     const { pending } = useFormStatus();
 
@@ -21,16 +26,30 @@ const CredentialsSignInForm = () => {
         disabled={pending}
         className="w-full bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-xl"
       >
-        {pending ? "Signing In..." : "Sign In"}
+        {pending ? "Submitting..." : "Sign up"}
       </button>
     );
   };
-
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
   return (
     <form action={action} className="space-y-4">
       <input type="hidden" name="callbackUrl" value={callbackUrl} />
+      <div>
+        <label
+          htmlFor="name"
+          className="block text-gray-700 text-sm font-medium mb-2"
+        >
+          Name
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          defaultValue={signUpDefaultValues.name}
+          autoComplete="name"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all outline-none"
+        />
+      </div>
       <div>
         <label
           htmlFor="email"
@@ -43,7 +62,7 @@ const CredentialsSignInForm = () => {
           name="email"
           type="email"
           required
-          defaultValue={signInDefaultValues.email}
+          defaultValue={signUpDefaultValues.email}
           autoComplete="email"
           className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all outline-none"
         />
@@ -61,7 +80,24 @@ const CredentialsSignInForm = () => {
           name="password"
           type="password"
           required
-          defaultValue={signInDefaultValues.password}
+          defaultValue={signUpDefaultValues.password}
+          autoComplete="current-password"
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all outline-none"
+        />
+      </div>
+      <div>
+        <label
+          htmlFor="confirmPassword"
+          className="block text-gray-700 text-sm font-medium mb-2"
+        >
+          Password
+        </label>
+        <input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          required
+          defaultValue={signUpDefaultValues.password}
           autoComplete="current-password"
           className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all outline-none"
         />
@@ -74,17 +110,17 @@ const CredentialsSignInForm = () => {
       )}
 
       <div className="text-center text-sm text-gray-600 mt-4">
-        Don&apos;t have an account?{" "}
+        Already have an account?{" "}
         <Link
-          href="/sign-up"
+          href={`/sign-in?callbackUrl=${callbackUrl}`}
           className="text-purple-600 hover:text-purple-800 font-semibold underline-offset-4 hover:underline transition-colors"
           target="_self"
         >
-          Create Account
+          Sign In
         </Link>
       </div>
     </form>
   );
 };
 
-export default CredentialsSignInForm;
+export default SignUpForm;
