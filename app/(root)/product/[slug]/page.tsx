@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import ProductPrice from "@/components/shared/product/product-price";
 import { getProductBySlug } from "@/lib/actions/product.actions";
 import ProductImages from "@/components/product/product-images";
+import AddToCart from "@/components/shared/product/add-to-cart";
 
 const ProductDetailsPage = async (props: {
   params: Promise<{ slug: string }>;
@@ -72,12 +73,16 @@ const ProductDetailsPage = async (props: {
 
             {/* Add to Cart Button */}
             {product.stock > 0 && (
-              <button
-                className="w-full bg-gradient-to-r from-brand to-brand-dark hover:from-brand-dark hover:to-brand text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] shadow-lg hover:shadow-brand/30"
-                // onClick={() => handleAddToCart(product)} // Replace with your add-to-cart logic
-              >
-                Add to Cart <i className="ml-2 fas fa-shopping-bag"></i>
-              </button>
+              <AddToCart
+                item={{
+                  productId: product.id,
+                  name: product.name,
+                  slug: product.slug,
+                  price: product.price,
+                  qty: 1,
+                  image: product.images![0],
+                }}
+              />
             )}
           </div>
         </div>
