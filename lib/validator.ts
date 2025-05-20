@@ -50,7 +50,7 @@ export const cartItemSchema = z.object({
   slug: z.string().min(1, "Slug is required"),
   qty: z.number().int().nonnegative("Quantity must be a non-negative number"),
   image: z.string().min(1, "Image is required"),
-  price: z
+  price: z.coerce
     .number()
     .refine(
       (value) => /^\d+(\.\d{2})?$/.test(Number(value).toFixed(2)),
