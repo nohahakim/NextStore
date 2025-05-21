@@ -20,7 +20,7 @@ export default async function ProductDetailsPage({
   // If it's a string, you can use Number(product.price) or parseFloat(product.price).
   const priceAsNumber =
     typeof product.price === "string"
-      ? Number(product.price)
+      ? parseFloat(product.price)
       : // @ts-expect-error: Decimal has toNumber()
         product.price.toNumber?.() ?? Number(product.price);
 

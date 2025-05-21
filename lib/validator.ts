@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { formatNumberWithDecimal } from "./utils";
 
-const currency = z
-  .string()
+const currency = z.coerce
+  .number()
   .refine(
-    (value) => /^\d+(\.\d{2})?$/.test(formatNumberWithDecimal(Number(value))),
+    (value) => /^\d+(\.\d{2})?$/.test(value.toFixed(2)),
     "Price must have exactly two decimal places"
   );
 
