@@ -9,7 +9,6 @@ import { prisma } from "@/db/prisma";
 import { CartItem } from "@/types";
 import { revalidatePath } from "next/cache";
 import { Prisma } from "@prisma/client";
-import exp from "constants";
 
 // Calculate cart price based on items
 const calcPrice = (items: z.infer<typeof cartItemSchema>[]) => {
