@@ -12,7 +12,6 @@ const SignUpForm = () => {
     message: "",
     success: false,
   });
-  const { pending } = useFormStatus();
 
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";

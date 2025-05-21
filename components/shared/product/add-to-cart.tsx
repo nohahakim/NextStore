@@ -93,11 +93,11 @@ const AddToCart = ({
     </div>
   ) : (
     <button
-      className="w-full bg-gradient-to-r from-brand to-brand-dark hover:from-brand-dark hover:to-brand text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] shadow-lg hover:shadow-brand/30"
+      className="w-full flex justify-center items-center bg-gradient-to-r from-brand to-brand-dark hover:from-brand-dark hover:to-brand text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] shadow-lg hover:shadow-brand/30"
       onClick={handleAddToCart} // Replace with your add-to-cart logic
     >
       {isPending ? (
-        <Loader className="w-4 h-4 animate-spin mr-2" />
+        <Loader className="w-5 h-5 animate-spin" />
       ) : (
         <Plus size={16} className="inline-block mr-2" />
       )}
