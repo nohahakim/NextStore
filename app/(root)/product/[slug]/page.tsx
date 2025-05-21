@@ -8,9 +8,10 @@ import { getMyCart } from "@/lib/actions/cart.actions";
 export default async function ProductDetailsPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
+  const { slug } = await params;
+
   const product = await getProductBySlug(slug);
   if (!product) notFound();
 
