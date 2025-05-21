@@ -1,19 +1,28 @@
-// export default ProductDetailsPage;
 import { notFound } from "next/navigation";
 import ProductPrice from "@/components/shared/product/product-price";
 import { getProductBySlug } from "@/lib/actions/product.actions";
 import ProductImages from "@/components/product/product-images";
 import AddToCart from "@/components/shared/product/add-to-cart";
 import { getMyCart } from "@/lib/actions/cart.actions";
-const ProductDetailsPage = async (props: {
-  params: Promise<{ slug: string }>;
-}) => {
-  const { slug } = await props.params;
 
+export default async function ProductDetailsPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = params;
   const product = await getProductBySlug(slug);
   if (!product) notFound();
 
   const cart = await getMyCart();
+
+  // If product.price is a Prisma Decimal, call `.toNumber()`.
+  // If it's a string, you can use Number(product.price) or parseFloat(product.price).
+  const priceAsNumber =
+    typeof product.price === "string"
+      ? Number(product.price)
+      : // @ts-expect-error: Decimal has toNumber()
+        product.price.toNumber?.() ?? Number(product.price);
 
   return (
     <section className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl overflow-hidden">
@@ -28,17 +37,6 @@ const ProductDetailsPage = async (props: {
               {product.name}
             </h1>
             <div className="flex items-center space-x-2">
-              {/* Simple star rating logic (replace as needed with your own rating component) */}
-              {/* <div className="flex text-amber-400">
-                {Array.from({ length: Math.floor(product.rating || 0) }).map(
-                  (_, i) => (
-                    <i key={i} className="fas fa-star"></i>
-                  )
-                )}
-                {product.rating && product.rating % 1 !== 0 && (
-                  <i className="fas fa-star-half-alt"></i>
-                )}
-              </div> */}
               <span className="text-gray-600 dark:text-gray-400">
                 {Number(product.rating)} of {product.numReviews} reviews
               </span>
@@ -49,10 +47,10 @@ const ProductDetailsPage = async (props: {
             {/* Price and Stock */}
             <div className="bg-gradient-to-r from-brand-light/10 to-brand/10 dark:from-brand-dark/10 dark:to-brand-dark/10 p-6 rounded-2xl">
               <div className="flex justify-between items-center">
-                <span className=" text-brand dark:text-brand-light">
+                <span className="text-brand dark:text-brand-light">
                   <ProductPrice
-                    value={Number(product.price)}
-                    className="text-4xl font-bold "
+                    value={priceAsNumber}
+                    className="text-4xl font-bold"
                   />
                 </span>
                 <span
@@ -81,7 +79,7 @@ const ProductDetailsPage = async (props: {
                   productId: product.id,
                   name: product.name,
                   slug: product.slug,
-                  price: product.price,
+                  price: priceAsNumber, // <-- ensure this is a number
                   qty: 1,
                   image: product.images![0],
                 }}
@@ -92,5 +90,4 @@ const ProductDetailsPage = async (props: {
       </div>
     </section>
   );
-};
-export default ProductDetailsPage;
+}
