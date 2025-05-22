@@ -11,7 +11,7 @@ import { shippingAddressDefaultValues } from "@/lib/constants";
 
 import { useTransition } from "react";
 import { updateUserAddress } from "@/lib/actions/user.actions";
-
+import { toast } from "sonner";
 import {
   Form,
   FormControl,
@@ -34,9 +34,21 @@ const ShippingAddressForm = ({
   const form = useForm<z.infer<typeof shippingAddressSchema>>({
     resolver: zodResolver(shippingAddressSchema),
     defaultValues: address || shippingAddressDefaultValues,
+    mode: "onBlur",
   });
 
-  const onSubmit = () => {
+  const onSubmit: SubmitHandler<z.infer<typeof shippingAddressSchema>> = async (
+    values
+  ) => {
+    startTransition(async () => {
+      const res = await updateUserAddress(values);
+
+      if (!res.success) {
+        toast.error(res.message);
+        return;
+      }
+      router.push("/payment-method");
+    });
     return;
   };
 
@@ -68,7 +80,11 @@ const ShippingAddressForm = ({
                   <FormItem className="w-full">
                     <FormLabel>Full Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter full name" {...field} />
+                      <Input
+                        placeholder="Enter full name"
+                        {...field}
+                        className="text-foreground"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -90,7 +106,11 @@ const ShippingAddressForm = ({
                   <FormItem className="w-full">
                     <FormLabel>Address</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter address" {...field} />
+                      <Input
+                        placeholder="Enter address"
+                        {...field}
+                        className="text-foreground"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -112,7 +132,11 @@ const ShippingAddressForm = ({
                   <FormItem className="w-full">
                     <FormLabel>City</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter city" {...field} />
+                      <Input
+                        placeholder="Enter city"
+                        {...field}
+                        className="text-foreground"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -132,7 +156,11 @@ const ShippingAddressForm = ({
                   <FormItem className="w-full">
                     <FormLabel>Country</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter country" {...field} />
+                      <Input
+                        placeholder="Enter country"
+                        {...field}
+                        className="text-foreground"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -152,7 +180,11 @@ const ShippingAddressForm = ({
                   <FormItem className="w-full">
                     <FormLabel>Postal Code</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter postal code" {...field} />
+                      <Input
+                        placeholder="Enter postal code"
+                        {...field}
+                        className="text-foreground"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

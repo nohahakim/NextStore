@@ -104,7 +104,7 @@ const Header: React.FC = () => {
               type="text"
               name="q"
               placeholder="Search for products..."
-              className="flex-grow rounded-md border border-gray-300 bg-white px-3 py-2 text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+              className="flex-grow rounded-md border border-gray-300 bg-white px-3 py-2 text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2  text-foreground"
             />
             {/* Search button */}
             <button

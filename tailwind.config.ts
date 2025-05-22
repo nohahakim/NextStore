@@ -46,12 +46,17 @@ const config: Config = {
           800: "#1F2937",
           900: "#111827",
         },
+        input: {
+          DEFAULT: "hsl(var(--input))",
+          foreground: "hsl(var(--foreground))",
+        },
+
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
       },
       animation: {
         "spin-slow": "spin 3s linear infinite",
