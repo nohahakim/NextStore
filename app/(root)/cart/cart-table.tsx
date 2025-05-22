@@ -3,10 +3,13 @@ import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { addItemToCart, removeItemFromCart } from "@/lib/actions/cart.actions";
-import { Loader, Minus, Plus } from "lucide-react";
+import { ArrowRight, Loader, Minus, Plus } from "lucide-react";
 import { Cart } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { formatCurrency } from "@/lib/utils";
 
 import {
   Table,
@@ -109,6 +112,28 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
               </TableBody>
             </Table>
           </div>
+          <Card>
+            <CardContent className="p-4   gap-4">
+              <div className="pb-3 text-xl">
+                Subtotal ({cart.items.reduce((a, c) => a + c.qty, 0)}):
+                {formatCurrency(cart.itemsPrice)}
+              </div>
+              <Button
+                onClick={() =>
+                  startTransition(() => router.push("/shipping-address"))
+                }
+                className="w-full"
+                disabled={isPending}
+              >
+                {isPending ? (
+                  <Loader className="animate-spin w-4 h-4" />
+                ) : (
+                  <ArrowRight className="w-4 h-4" />
+                )}
+                Proceed to Checkout
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       )}
     </>

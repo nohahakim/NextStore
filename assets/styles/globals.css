@@ -63,6 +63,14 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --destructive: 0 84.2% 60.2%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 0%;
+    --info: 207 90% 54%;
+    --info-foreground: 0 0% 100%;
+    --destructive-foreground: 0 0% 100%;
   }
 
   .dark {

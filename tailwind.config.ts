@@ -46,6 +46,10 @@ const config: Config = {
           800: "#1F2937",
           900: "#111827",
         },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
