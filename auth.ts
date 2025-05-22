@@ -103,7 +103,7 @@ export const config = {
 
       return token;
     },
-    async session({ session, user, trigger, token }: any) {
+    async session({ session, trigger, token }: any) {
       // Set the user id on the session
       session.user.id = token.id;
       session.user.name = token.name;
