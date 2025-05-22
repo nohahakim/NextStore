@@ -112,26 +112,49 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
               </TableBody>
             </Table>
           </div>
-          <Card>
-            <CardContent className="p-4   gap-4">
-              <div className="pb-3 text-xl">
-                Subtotal ({cart.items.reduce((a, c) => a + c.qty, 0)}):
-                {formatCurrency(cart.itemsPrice)}
+          <Card className="mt-5 md:mt-0">
+            <CardContent>
+              <div className="flex flex-col gap-2">
+                <h2 className="h2-bold">Order Summary</h2>
+                <div className="flex justify-between">
+                  <span>Subtotal</span>
+                  <span>${cart.itemsPrice}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Shipping</span>
+                  <span>${cart.shippingPrice}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Tax</span>
+                  <span>${cart.taxPrice}</span>
+                </div>
+                <div className="flex justify-between font-semibold">
+                  <span>Total</span>
+                  <span>${cart.totalPrice}</span>
+                </div>
+
+                <Button
+                  className="w-full mt-4"
+                  variant="secondary"
+                  size="lg"
+                  type="button"
+                  onClick={() => {
+                    startTransition(() => {
+                      router.push("/shipping-address");
+                    });
+                  }}
+                  disabled={isPending}
+                >
+                  {isPending ? (
+                    <Loader className="animate-spin" size={16} />
+                  ) : (
+                    <>
+                      Proceed to Checkout
+                      <ArrowRight className="ml-2" />
+                    </>
+                  )}
+                </Button>
               </div>
-              <Button
-                onClick={() =>
-                  startTransition(() => router.push("/shipping-address"))
-                }
-                className="w-full"
-                disabled={isPending}
-              >
-                {isPending ? (
-                  <Loader className="animate-spin w-4 h-4" />
-                ) : (
-                  <ArrowRight className="w-4 h-4" />
-                )}
-                Proceed to Checkout
-              </Button>
             </CardContent>
           </Card>
         </div>
