@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FaShoppingCart, FaEllipsisV } from "react-icons/fa";
 import UserButton from "./user-button";
+import { Cart } from "@/types";
 import {
   Sheet,
   SheetContent,
@@ -11,7 +12,8 @@ import {
 
 import ModeToggle from "./mode-toggle";
 
-const Menu = () => {
+const Menu = ({ cart }: { cart?: Cart }) => {
+  const totalItems = cart?.items?.reduce((acc, item) => acc + item.qty, 0) || 0;
   return (
     <div className="flex justify-end gap-3">
       <nav className="hidden md:flex items-center space-x-3">
@@ -22,9 +24,11 @@ const Menu = () => {
           className="hidden md:flex items-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition relative"
         >
           <FaShoppingCart className="text-lg" />
-          <span className="absolute -top-1 -right-1 bg-accent text-xs w-5 h-5 rounded-full flex items-center justify-center">
-            3
-          </span>
+          {totalItems > 0 && (
+            <span className="absolute -top-1 -right-1 bg-accent text-xs w-5 h-5 rounded-full flex items-center justify-center">
+              {totalItems}
+            </span>
+          )}
         </Link>
         <UserButton />
       </nav>
@@ -43,9 +47,11 @@ const Menu = () => {
               className="flex items-center p-3 rounded-full bg-white/10 hover:bg-white/20 transition relative"
             >
               <FaShoppingCart className="text-lg" />
-              <span className="absolute -top-1 -right-1 bg-accent text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                3
-              </span>
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-accent text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
             </Link>
             <UserButton />
             {/* <Link

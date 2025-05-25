@@ -4,8 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaBars, FaChevronDown, FaSearch } from "react-icons/fa";
 import Menu from "./menu";
+import { getMyCart } from "@/lib/actions/cart.actions";
 
-const Header: React.FC = () => {
+const Header: React.FC = async () => {
+  const cart = await getMyCart();
   return (
     <header
       className="    w-full border-b
@@ -117,7 +119,7 @@ const Header: React.FC = () => {
           </form>
         </div>
 
-        <Menu />
+        <Menu cart={cart} />
       </div>
     </header>
   );
