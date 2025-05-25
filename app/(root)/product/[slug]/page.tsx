@@ -17,13 +17,10 @@ export default async function ProductDetailsPage({
 
   const cart = await getMyCart();
 
-  // If product.price is a Prisma Decimal, call `.toNumber()`.
-  // If it's a string, you can use Number(product.price) or parseFloat(product.price).
   const priceAsNumber =
     typeof product.price === "string"
       ? parseFloat(product.price)
-      : // @ts-expect-error: Decimal has toNumber()
-        product.price.toNumber?.() ?? Number(product.price);
+      : product.price ?? Number(product.price);
 
   return (
     <section className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl overflow-hidden">

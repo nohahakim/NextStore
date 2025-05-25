@@ -1,11 +1,12 @@
 import { z } from "zod";
+import { formatNumberWithDecimal } from "./utils";
 import { PAYMENT_METHODS } from "./constants";
 
-const currency = z.coerce
-  .number()
+const currency = z
+  .string()
   .refine(
-    (value) => /^\d+(\.\d{2})?$/.test(value.toFixed(2)),
-    "Price must have exactly two decimal places"
+    (value) => /^\d+(\.\d{2})?$/.test(formatNumberWithDecimal(Number(value))),
+    "Price must have exactly two decimal places (e.g., 49.99)"
   );
 
 // Schema for inserting products
