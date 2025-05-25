@@ -150,24 +150,22 @@ export async function approvePayPalOrder(
   data: { orderID: string }
 ) {
   try {
-    // Find the order in the database
+    // Get order from database
     const order = await prisma.order.findFirst({
-      where: {
-        id: orderId,
-      },
+      where: { id: orderId },
     });
     if (!order) throw new Error("Order not found");
 
-    // Check if the order is already paid
     const captureData = await paypal.capturePayment(data.orderID);
     if (
       !captureData ||
       captureData.id !== (order.paymentResult as PaymentResult)?.id ||
       captureData.status !== "COMPLETED"
-    )
-      throw new Error("Error in paypal payment");
+    ) {
+      throw new Error("Error in PayPal payment");
+    }
 
-    //  @todo - Update order to paid
+    // Update order to paid
     await updateOrderToPaid({
       orderId,
       paymentResult: {
@@ -181,12 +179,9 @@ export async function approvePayPalOrder(
 
     revalidatePath(`/order/${orderId}`);
 
-    return {
-      success: true,
-      message: "Your order has been successfully paid by PayPal",
-    };
-  } catch (err) {
-    return { success: false, message: formatError(err) };
+    return { success: true, message: "Your order has been paid" };
+  } catch (error) {
+    return { success: false, message: formatError(error) };
   }
 }
 
