@@ -70,19 +70,19 @@ export default async function ProductDetailsPage({
             </p>
 
             {/* Add to Cart Button */}
-            {product.stock > 0 && (
-              <AddToCart
-                cart={cart}
-                item={{
-                  productId: product.id,
-                  name: product.name,
-                  slug: product.slug,
-                  price: priceAsNumber, // <-- ensure this is a number
-                  qty: 1,
-                  image: product.images![0],
-                }}
-              />
-            )}
+            <AddToCart
+              variant="detailed"
+              cart={cart}
+              item={{
+                productId: product.id,
+                name: product.name,
+                slug: product.slug,
+                price: priceAsNumber,
+                qty: 1,
+                image: product.images[0],
+              }}
+              isInStock={product.stock > 0}
+            />
           </div>
         </div>
       </div>

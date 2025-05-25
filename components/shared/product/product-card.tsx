@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import ProductPrice from "./product-price";
 import { Product } from "@/types";
+import AddToCart from "./add-to-cart";
 
 const ProductCard = ({ product }: { product: Product }) => {
   const renderStars = (rating: number = 0) => {
@@ -94,16 +95,19 @@ const ProductCard = ({ product }: { product: Product }) => {
               isInStock ? "text-gray-900 dark:text-white" : "text-red-500"
             } transition-all`}
           />
-          <button
-            disabled={!isInStock}
-            className={`px-6 py-3 rounded-lg font-medium transition-all ${
-              isInStock
-                ? "bg-gradient-to-r from-accent to-accent-dark text-white hover:shadow-lg hover:-translate-y-0.5"
-                : "bg-gray-200 dark:bg-gray-700 text-gray-500 cursor-not-allowed"
-            }`}
-          >
-            {isInStock ? "Add to Cart" : "Out of Stock"}
-          </button>
+
+          <AddToCart
+            variant="simple"
+            item={{
+              productId: product.id,
+              name: product.name,
+              slug: product.slug,
+              price: Number(product.price),
+              qty: 1,
+              image: product.images[0],
+            }}
+            isInStock={product.stock > 0}
+          />
         </div>
       </div>
 
