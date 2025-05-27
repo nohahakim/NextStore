@@ -13,6 +13,7 @@ import { revalidatePath } from "next/cache";
 import { paypal } from "../paypal";
 import { CartItem, PaymentResult } from "@/types";
 import { PAGE_SIZE } from "../constants";
+import { Prisma } from "@prisma/client";
 // Create an order
 export async function createOrder() {
   try {
