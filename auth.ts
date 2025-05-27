@@ -113,7 +113,9 @@ export const config = {
       if (trigger === "update" && token.name) {
         session.user.name = token.name;
       }
-
+      if (session?.user.name && trigger === "update") {
+        token.name = session.user.name;
+      }
       // Return the updated session object
       return session;
     },
