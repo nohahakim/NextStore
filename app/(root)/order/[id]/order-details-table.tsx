@@ -23,29 +23,33 @@ import {
 import {
   approvePayPalOrder,
   createPayPalOrder,
+  deliverOrder,
+  updateOrderToPaidByCOD,
 } from "@/lib/actions/order.actions";
+import { useTransition } from "react";
+import { Button } from "@/components/ui/button";
 
-interface OrderDetailsTableProps {
-  order: Order;
-  paypalClientId: string;
-}
-
-const OrderDetailsTable: React.FC<OrderDetailsTableProps> = ({
+const OrderDetailsTable = ({
   order,
   paypalClientId,
+  isAdmin,
+}: {
+  order: Omit<Order, "paymentResult">;
+  paypalClientId: string;
+  isAdmin: boolean;
 }) => {
   const {
     id: orderId,
     shippingAddress,
     orderItems,
     itemsPrice,
-    taxPrice,
     shippingPrice,
+    taxPrice,
     totalPrice,
     paymentMethod,
+    isDelivered,
     isPaid,
     paidAt,
-    isDelivered,
     deliveredAt,
   } = order;
 
@@ -74,6 +78,53 @@ const OrderDetailsTable: React.FC<OrderDetailsTableProps> = ({
     }
     toast.success("Order paid successfully");
     window.location.reload();
+  };
+  const MarkAsPaidButton = () => {
+    const [isPending, startTransition] = useTransition();
+
+    return (
+      <Button
+        type="button"
+        className="bg-brand hover:bg-brand-dark text-white transition-colors"
+        disabled={isPending}
+        onClick={() =>
+          startTransition(async () => {
+            const res = await updateOrderToPaidByCOD(order.id);
+            if (!res.success) {
+              toast.error(res.message || "Failed to mark order as paid");
+              return;
+            }
+            toast.success("Order marked as paid successfully");
+          })
+        }
+      >
+        {isPending ? "processing..." : "Mark As Paid"}
+      </Button>
+    );
+  };
+
+  const MarkAsDeliveredButton = () => {
+    const [isPending, startTransition] = useTransition();
+
+    return (
+      <Button
+        type="button"
+        className="bg-brand hover:bg-brand-dark text-white transition-colors"
+        disabled={isPending}
+        onClick={() =>
+          startTransition(async () => {
+            const res = await deliverOrder(order.id);
+            if (!res.success) {
+              toast.error(res.message || "Failed to mark order as delivered");
+              return;
+            }
+            toast.success("Order marked as delivered successfully");
+          })
+        }
+      >
+        {isPending ? "processing..." : "Mark As Delivered"}
+      </Button>
+    );
   };
 
   return (
@@ -191,6 +242,11 @@ const OrderDetailsTable: React.FC<OrderDetailsTableProps> = ({
                   </PayPalScriptProvider>
                 </div>
               )}
+              {/* Cash On Delivery */}
+              {isAdmin && !isPaid && paymentMethod === "CashOnDelivery" && (
+                <MarkAsPaidButton />
+              )}
+              {isAdmin && isPaid && !isDelivered && <MarkAsDeliveredButton />}
             </CardContent>
           </Card>
         </div>
