@@ -4,7 +4,7 @@ import { FaStar, FaRegStar } from "react-icons/fa";
 import ProductPrice from "./product-price";
 import { Product } from "@/types";
 import AddToCart from "./add-to-cart";
-
+import { cn } from "@/lib/utils";
 const ProductCard = ({ product }: { product: Product }) => {
   const renderStars = (rating: number = 0) => {
     return Array.from({ length: 5 }, (_, i) =>
@@ -46,7 +46,10 @@ const ProductCard = ({ product }: { product: Product }) => {
             alt={product.name}
             width={480}
             height={480}
-            className="w-full h-full object-cover transition-opacity duration-500 ease-in-out group-hover:opacity-0"
+            className={cn(
+              "w-full h-full object-cover transition-opacity duration-500 ease-in-out",
+              product.images[1] && "group-hover:opacity-0"
+            )}
           />
 
           {product.images[1] && (
