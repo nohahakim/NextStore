@@ -24,7 +24,7 @@ import { createProduct, updateProduct } from "@/lib/actions/product.actions";
 import { UploadButton } from "@/lib/uploadthing";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-// import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const ProductForm = ({
   type,
@@ -76,8 +76,8 @@ const ProductForm = ({
   };
 
   const images = form.watch("images");
-  // const isFeatured = form.watch("isFeatured");
-  // const banner = form.watch("banner");
+  const isFeatured = form.watch("isFeatured");
+  const banner = form.watch("banner");
 
   return (
     <Form {...form}>
@@ -275,7 +275,7 @@ const ProductForm = ({
         <div className="upload-field">
           {/* isFeatured */}
           Featured Product
-          {/* <Card>
+          <Card>
             <CardContent className="space-y-2 mt-2">
               <FormField
                 control={form.control}
@@ -308,15 +308,12 @@ const ProductForm = ({
                     form.setValue("banner", res[0].url);
                   }}
                   onUploadError={(error: Error) => {
-                    toast({
-                      variant: "destructive",
-                      description: `ERROR! ${error.message}`,
-                    });
+                    toast.error(error.message);
                   }}
                 />
               )}
             </CardContent>
-          </Card> */}
+          </Card>
         </div>
         <div>
           {/* Description */}
