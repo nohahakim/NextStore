@@ -15,6 +15,10 @@ const config: Config = {
         sans: ["Inter", "ui-sans-serif", "system-ui"],
       },
       colors: {
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
         brand: {
           light: "#E3DFFF",
           DEFAULT: "#7C3AED",
