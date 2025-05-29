@@ -17,6 +17,7 @@ const AdminProductsPage = async (props: {
   searchParams: Promise<{
     page: string;
     query: string;
+    category: string;
   }>;
 }) => {
   const searchParams = await props.searchParams;
