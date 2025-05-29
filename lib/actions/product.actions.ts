@@ -25,10 +25,8 @@ export async function getProductBySlug(slug: string) {
   });
 }
 export async function getAllProducts({
-  query,
   limit = PAGE_SIZE,
   page,
-  category,
 }: {
   query: string;
   limit?: number;
