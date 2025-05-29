@@ -25,6 +25,7 @@ import { UploadButton } from "@/lib/uploadthing";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { Checkbox } from "@/components/ui/checkbox";
+type ProductFormValues = z.infer<typeof insertProductSchema>;
 
 const ProductForm = ({
   type,
@@ -37,18 +38,16 @@ const ProductForm = ({
 }) => {
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof insertProductSchema>>({
+  const form = useForm<ProductFormValues>({
     resolver:
       type === "Update"
-        ? zodResolver(updateProductSchema)
+        ? zodResolver(updateProductSchema as z.ZodType<ProductFormValues>)
         : zodResolver(insertProductSchema),
     defaultValues:
       product && type === "Update" ? product : productDefaultValues,
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof insertProductSchema>> = async (
-    values
-  ) => {
+  const onSubmit: SubmitHandler<ProductFormValues> = async (values) => {
     // On Create
     if (type === "Create") {
       const res = await createProduct(values);
