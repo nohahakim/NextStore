@@ -2,10 +2,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FaBars, FaChevronDown, FaSearch } from "react-icons/fa";
+import { FaChevronDown, FaSearch } from "react-icons/fa";
 import Menu from "./menu";
 import { getMyCart } from "@/lib/actions/cart.actions";
-
+import CategoriesDrawer from "./categories-drawer";
 const Header: React.FC = async () => {
   const cart = await getMyCart();
   return (
@@ -18,16 +18,7 @@ const Header: React.FC = async () => {
     >
       <div className="max-w-[1280px] mx-auto flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          {/* Mobile menu button */}
-          <button
-            type="button"
-            aria-haspopup="dialog"
-            aria-expanded="false"
-            className="inline-flex items-center justify-center gap-2 rounded-md p-2 text-white hover:bg-brand-dark/50 transition focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-transparent"
-            id="menu-button"
-          >
-            <FaBars className="h-6 w-6" />
-          </button>
+          <CategoriesDrawer />
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <Image

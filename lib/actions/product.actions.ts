@@ -91,7 +91,14 @@ export async function getAllProducts({
     take: limit,
   });
 
-  const dataCount = await prisma.product.count();
+  const dataCount = await prisma.product.count({
+    where: {
+      ...queryFilter,
+      ...categoryFilter,
+      ...priceFilter,
+      ...ratingFilter,
+    },
+  }); // 🔢 Counts total matches
 
   return { data, totalPages: Math.ceil(dataCount / limit) };
 }
@@ -165,4 +172,12 @@ export async function getProductById(productId: string) {
   });
 
   return convertToPlainObject(data);
+}
+
+export async function getAllCategories() {
+  const data = await prisma.product.groupBy({
+    by: ["category"],
+    _count: true,
+  });
+  return data;
 }
