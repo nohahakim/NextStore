@@ -28,7 +28,7 @@ const CategoriesDrawer = async () => {
       <DrawerContent className="h-full max-w-sm rounded-tl-none">
         <DrawerHeader>
           <DrawerTitle>Select a category</DrawerTitle>
-          <div className="space-y-1">
+          <div className="space-y-1 mt-4">
             {categories.map((x) => (
               <Button
                 className="w-full justify-start"

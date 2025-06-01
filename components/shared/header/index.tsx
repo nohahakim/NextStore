@@ -6,6 +6,8 @@ import { FaChevronDown, FaSearch } from "react-icons/fa";
 import Menu from "./menu";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import CategoriesDrawer from "./categories-drawer";
+import Search from "./search";
+import { SheetContent } from "@/components/ui/sheet";
 const Header: React.FC = async () => {
   const cart = await getMyCart();
   return (
@@ -32,14 +34,12 @@ const Header: React.FC = async () => {
             <span className="font-bold text-xl  tracking-tight">Nextstore</span>
           </Link>
         </div>
-        {/* Search bar (desktop) */}
-        <div className=" hidden md:flex relative  mx-8">
+        {/* <div className=" hidden md:flex relative  mx-8">
           <form
             action="/search"
             method="GET"
             className="flex items-center  space-x-2"
           >
-            {/* Category dropdown */}
             <div className="relative">
               <button
                 type="button"
@@ -99,7 +99,6 @@ const Header: React.FC = async () => {
               placeholder="Search for products..."
               className="flex-grow rounded-md border border-gray-300 bg-white px-3 py-2 text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2  text-foreground"
             />
-            {/* Search button */}
             <button
               type="submit"
               className="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-dark transition focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
@@ -108,6 +107,10 @@ const Header: React.FC = async () => {
               Search
             </button>
           </form>
+        </div> */}
+
+        <div className=" hidden md:flex relative  mx-8">
+          <Search />
         </div>
 
         <Menu cart={cart} />

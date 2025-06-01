@@ -17,6 +17,7 @@ import { prisma } from "@/db/prisma";
 import { ShippingAddress } from "@/types";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { Prisma } from "@prisma/client";
 
 // Sign in the user with credentials
 export async function signInWithCredentials(
