@@ -2,12 +2,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FaChevronDown, FaSearch } from "react-icons/fa";
 import Menu from "./menu";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import CategoriesDrawer from "./categories-drawer";
 import Search from "./search";
-import { SheetContent } from "@/components/ui/sheet";
 const Header: React.FC = async () => {
   const cart = await getMyCart();
   return (
