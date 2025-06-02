@@ -1,24 +1,18 @@
-"use client";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
-
-const ViewAllProductsButton = () => {
-  const router = useRouter();
-
-  const handleViewAll = () => {
-    router.push("/search");
-  };
-
+export default function ViewAllProductsButton() {
   return (
-    <Button
-      variant="outline"
-      className="w-full md:w-auto"
-      onClick={handleViewAll}
-    >
-      View All Products
-    </Button>
+    <div className="flex justify-center items-center my-8">
+      <Button
+        asChild
+        className="
+      
+      px-8 py-4 text-lg font-semibold
+   bg-gradient-to-r from-brand to-brand-dark hover:from-brand-dark hover:to-brand text-white   hover:shadow-brand/30"
+      >
+        <Link href="/search">View All Products</Link>
+      </Button>
+    </div>
   );
-};
-
-export default ViewAllProductsButton;
+}
