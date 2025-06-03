@@ -1,24 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaStar, FaRegStar } from "react-icons/fa";
 import ProductPrice from "./product-price";
 import { Product } from "@/types";
 import AddToCart from "./add-to-cart";
 import { cn } from "@/lib/utils";
+import Rating from "./rating";
 const ProductCard = ({ product }: { product: Product }) => {
-  const renderStars = (rating: number = 0) => {
-    return Array.from({ length: 5 }, (_, i) =>
-      i < Math.floor(rating) ? (
-        <FaStar key={i} className="w-4 h-4 text-amber-400 drop-shadow-sm" />
-      ) : (
-        <FaRegStar
-          key={i}
-          className="w-4 h-4 text-gray-300/80 dark:text-gray-600"
-        />
-      )
-    );
-  };
-
   const statusColors = {
     featured: "from-emerald-500 to-teal-400",
   };
@@ -73,24 +60,18 @@ const ProductCard = ({ product }: { product: Product }) => {
             {product.brand}
           </span>
         </div>
-
         <Link href={`/product/${product.slug}`} className="block">
           <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 hover:text-accent dark:hover:text-accent-light transition-colors line-clamp-2">
             {product.name}
           </h3>
         </Link>
 
-        {product.rating !== undefined && (
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1 [&>svg]:hover:scale-110 [&>svg]:transition-transform">
-              {renderStars(Number(product.rating))}
-            </div>
-            <span className="text-sm text-gray-600 dark:text-gray-300">
-              ({product.numReviews?.toLocaleString() ?? 0})
-            </span>
-          </div>
-        )}
-
+        <div className="flex items-center gap-2">
+          <Rating value={Number(product.rating)} />{" "}
+          <span className="text-sm text-gray-600 dark:text-gray-300">
+            ({product.numReviews?.toLocaleString() ?? 0})
+          </span>
+        </div>
         <div className="flex items-center justify-between">
           <ProductPrice
             value={Number(product.price)}
