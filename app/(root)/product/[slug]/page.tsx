@@ -6,6 +6,7 @@ import AddToCart from "@/components/shared/product/add-to-cart";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import { auth } from "@/auth";
 import ReviewList from "./review-list";
+import Rating from "@/components/shared/product/rating";
 
 export default async function ProductDetailsPage({
   params,
@@ -41,9 +42,8 @@ export default async function ProductDetailsPage({
                 {product.name}
               </h1>
               <div className="flex items-center space-x-2">
-                <span className="text-gray-600 dark:text-gray-400">
-                  {Number(product.rating)} of {product.numReviews} reviews
-                </span>
+                <Rating value={Number(product.rating)} />
+                <p>{product.numReviews} reviews</p>
               </div>
             </div>
 

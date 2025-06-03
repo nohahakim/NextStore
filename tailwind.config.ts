@@ -39,6 +39,10 @@ const config: Config = {
           DEFAULT: "#F3F4F6",
           dark: "#1F2937",
         },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
         gray: {
           100: "#F3F4F6",
           200: "#E5E7EB",
