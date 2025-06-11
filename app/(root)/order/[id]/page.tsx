@@ -4,6 +4,7 @@ import { ShippingAddress } from "@/types";
 import OrderDetailsTable from "./order-details-table";
 import { auth } from "@/auth";
 import Stripe from "stripe";
+
 export const metadata = {
   title: "Order Details",
 };
