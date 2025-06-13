@@ -12,7 +12,7 @@ import {
   paymentMethodSchema,
   updateUserSchema,
 } from "../validator";
-import { hashSync } from "bcrypt-ts-edge";
+import { hash } from "../encrypt";
 import { prisma } from "@/db/prisma";
 import { ShippingAddress } from "@/types";
 import { z } from "zod";
@@ -58,7 +58,7 @@ export async function signUp(prevState: unknown, formData: FormData) {
 
     const plainPassword = user.password;
 
-    user.password = hashSync(user.password, 10);
+    user.password = await hash(user.password);
 
     await prisma.user.create({
       data: {
