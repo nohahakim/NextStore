@@ -42,7 +42,12 @@ const UserButton = async () => {
             </button>
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56 bg-white" align="end" forceMount>
+        {/* <DropdownMenuContent className="w-56 bg-white" align="end" forceMount> */}
+        <DropdownMenuContent
+          align="end"
+          forceMount
+          className="w-56 bg-popover text-popover-foreground"
+        >
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none">
@@ -75,7 +80,8 @@ const UserButton = async () => {
               <button
                 onClick={signOutUser}
                 type="submit"
-                className="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-accent hover:text-white"
+                className="w-full text-left block px-4 py-2 text-popover-foreground
+             hover:bg-accent hover:text-white"
                 role="menuitem"
               >
                 Sign Out

@@ -54,13 +54,6 @@ const Menu = ({ cart }: { cart?: Cart }) => {
               )}
             </Link>
             <UserButton />
-            {/* <Link
-              href="/sign-in"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-4 py-2 text-sm font-medium text-brand-dark hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-            >
-              <FaUser className="h-5 w-5" />
-              Sign In
-            </Link> */}
           </SheetContent>
         </Sheet>
       </nav>
