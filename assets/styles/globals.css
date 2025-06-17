@@ -120,3 +120,10 @@
     color: #000 !important;
   }
 }
+/* tailwind.css (or globals.css) */
+@layer utilities {
+  /* 1️⃣ muted colour */
+  .text-muted-foreground {
+    color: hsl(var(--muted-foreground));
+  }
+}
